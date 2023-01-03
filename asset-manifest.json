@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.css": "/darkeden48.github.io/react_image_finder/static/css/main.31d6cfe0.css",
+    "main.js": "/darkeden48.github.io/react_image_finder/static/js/main.bfc224e3.js",
+    "index.html": "/darkeden48.github.io/react_image_finder/index.html",
+    "main.bfc224e3.js.map": "/darkeden48.github.io/react_image_finder/static/js/main.bfc224e3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.31d6cfe0.css",
+    "static/js/main.bfc224e3.js"
+  ]
+}
