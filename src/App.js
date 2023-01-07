@@ -1,13 +1,27 @@
 import React from "react";
+import { fetchImages, changePage, changeQuery } from "./service/Api";
 import Searchbar from "./components/Searchbar/Searchbar";
+import ImageGallery from "./components/ImageGallery/ImageGallery";
+import Button from "./components/Button/Button";
 
 export default class App extends React.Component {
   state = {
     searchImage: "",
+    images: null,
   };
 
   onSubmitForm = (input) => {
     this.setState({ searchImage: input });
+    fetchImages().then((data) => {
+      this.setState({
+        images: data.hits,
+      });
+    });
+    changeQuery(input);
+  };
+
+  onLoadMore = () => {
+    changePage();
   };
 
   render() {
@@ -17,7 +31,8 @@ export default class App extends React.Component {
           search={this.state.searchImage}
           onSubmit={this.onSubmitForm}
         />
-        <div>{this.state.searchImage}</div>
+        {this.state.images && <ImageGallery images={this.state.images} />}
+        {this.state.images && <Button onClick={this.onLoadMore} />}
       </>
     );
   }

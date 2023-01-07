@@ -2,12 +2,12 @@ import React from "react";
 
 export default class Searchbar extends React.Component {
   state = {
-    search: null,
+    search: "",
   };
 
   handleChange = (e) => {
     this.setState({
-      search: e.target.value,
+      search: e.target.value.trim(),
     });
   };
 
@@ -37,8 +37,6 @@ export default class Searchbar extends React.Component {
             className="input"
             value={this.state.search}
             type="text"
-            autocomplete="off"
-            autofocus
             placeholder="Search images and photos"
             onChange={this.handleChange}
           />
