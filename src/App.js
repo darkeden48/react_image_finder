@@ -6,6 +6,8 @@ import Button from "./components/Button/Button";
 import Loader from "./components/Loader/Loader";
 import Modal from "./components/Modal/Modal";
 
+const body = document.querySelector("body");
+
 export default class App extends React.Component {
   state = {
     searchImage: "",
@@ -38,6 +40,7 @@ export default class App extends React.Component {
         }, 100);
       });
     }
+    body.scrollIntoView({ block: "end", behavior: "smooth" });
   }
 
   onSubmitForm = (input) => {
@@ -45,10 +48,12 @@ export default class App extends React.Component {
   };
 
   onLoadMore = () => {
-    this.setState((prevState) => ({
-      loading: true,
-      page: prevState.page + 1,
-    }));
+    setTimeout(() => {
+      this.setState((prevState) => ({
+        loading: true,
+        page: prevState.page + 1,
+      }));
+    }, 100);
   };
 
   toggleModal = (event) => {
@@ -75,14 +80,16 @@ export default class App extends React.Component {
         {images === [] ? (
           <p>Sorry pictured not finded</p>
         ) : (
-          <ImageGallery images={images} onOpenModal={this.onOpenModal} />
+          !loading && (
+            <ImageGallery images={images} onOpenModal={this.onOpenModal} />
+          )
         )}
         {showModal && (
           <Modal onCloseModal={this.toggleModal}>
-            <img src={modalImage} alt={modalTag} />
+            <img className="modal-image" src={modalImage} alt={modalTag} />
           </Modal>
         )}
-        {images && <Button onClick={this.onLoadMore} />}
+        {!loading && images && <Button onClick={this.onLoadMore} />}
       </>
     );
   }
